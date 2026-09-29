@@ -1,0 +1,14 @@
+!pip install diffusers accelerate
+
+from diffusers import StableDiffusionPipeline
+import torch
+# Load the pre-trained model
+
+pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
+pipe = pipe.to("cuda") # Use GPU if available # Generate image
+prompt = "A futuristic city at sunset, cyberpunk style" 
+image = pipe(prompt).images[0]
+# Save the image
+
+image.save("output.png")
+ 
